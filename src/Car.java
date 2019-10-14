@@ -14,6 +14,8 @@ public class Car {
 
     /**
      *
+     *
+     *
      * @param make The make of the car.
      * @param price The price of the car.
      * @param maxSpeed The maxSpeed of the car.
