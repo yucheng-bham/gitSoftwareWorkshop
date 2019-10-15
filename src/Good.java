@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+
 /**
  *
  * A class Good with the three field variables name, netPrice, and the static variable
@@ -10,7 +12,7 @@
 public class Good {
     String name;
     double netPrice;
-    final static double VAT_RATE = 0.20;
+    final static double VAT_RATE = 20.0;
 
     /**
      *
@@ -63,7 +65,7 @@ public class Good {
     public String toString() {
         return "The " + name +
                 " has a gross price of " +
-                "\u00A3" + grossPrice() +
+                "\u00A3" + String.format("%.2f",grossPrice()) +
                 ".";
     }
 
@@ -72,8 +74,7 @@ public class Good {
      * @return A gross price of the Good when a fixed VAT rate is under consideration.
      */
     public double grossPrice() {
-//        this.netPrice = netPrice * (1 + VAT_RATE);
-        return this.netPrice * (1 + VAT_RATE);
+        return this.netPrice * (100 + VAT_RATE) / 100;
     }
 
     /**
