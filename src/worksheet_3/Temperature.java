@@ -1,6 +1,7 @@
 package worksheet_3;
 
 public class Temperature {
+    public double[] temperatures = new double[365];
     public static int coldest(double[] temperatures) {
         double coldest = Double.MAX_VALUE;
         int day = 0;
