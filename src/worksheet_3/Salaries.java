@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Salaries {
-    ArrayList<double[]> allSalaries;
+    public ArrayList<double[]> allSalaries;
     public static double average(double[] employeeSalaries)
             throws IllegalArgumentException {
         int count = 0;
