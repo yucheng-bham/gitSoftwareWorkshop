@@ -17,7 +17,7 @@ class GenerateClassTest {
 
     @Test
     void makeFields() {
-        String expected = " private String name;\n" + " private Date dob;\n";
+        String expected = "  private String name;\n" + "  private Date dob;\n\n";
 //        System.out.println(expected);
         String actual = generateClass.makeFields();
         assertEquals(expected,actual);
@@ -26,10 +26,8 @@ class GenerateClassTest {
     @Test
     void makeConstructor() {
         String expected =
-                "public Person(String name, Date dob) {\n" +
-                        " this.name = name;\n" +
-                        " this.dob = dob;\n" +
-                        "}";
+                "  public Person(String name, Date dob){\n" + "    this.name = name;\n"
+                        + "    this.dob = dob;\n" + "  }\n";
 //        System.out.println(expected);
         String actual = generateClass.makeConstructor();
 //        System.out.println(actual);
@@ -39,12 +37,9 @@ class GenerateClassTest {
 
     @Test
     void makeGetters() {
-        String expected = "public String getName(){\n" +
-                "  return name;\n" +
-                "}\n" +
-                "public Date getDob(){\n" +
-                "  return dob;\n" +
-                "}";
+        String expected =
+                "  public String getName(){\n" + "    return name;\n" + "  }\n"
+                        + "  public Date getDob(){\n" + "    return dob;\n" + "  }\n";;
         String actual = generateClass.makeGetters();
         assertEquals(expected,actual);
     }
@@ -52,18 +47,15 @@ class GenerateClassTest {
     @Test
     void makeSetters() {
         String expected =
-                "public void setName(){\n" +
-                        "  this.name = name;\n" +
-                        "}\n" +
-                        "public void setDob(){\n" +
-                        "  this.dob = dob;\n" +
-                        "}";
+                "  public void setName(String name){\n" + "    this.name = name;\n" + "  }\n"
+                        + "  public void setDob(Date dob){\n" + "    this.dob = dob;\n" + "  }\n";;
         String actual = generateClass.makeSetters();
         assertEquals(expected,actual);
     }
 
     @Test
     void writeFile() {
+        generateClass.writeFile();
 
     }
 }

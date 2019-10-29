@@ -1,32 +1,41 @@
 package worksheet_3;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Salaries {
-    public ArrayList<double[]> allSalaries;
-    public static double average(double[] employeeSalaries)
-            throws IllegalArgumentException {
+public class Salaries  {
+    private ArrayList<double[]> allSalaries;
+    public void add(double[] Salary) {
+        this.allSalaries.add(Salary);
+    }
+
+
+    public Salaries() {
+        allSalaries = new ArrayList<>();
+    }
+
+    public static double average(double[] employeeSalaries)  {
+
         int count = 0;
         double sum = 0;
         for (double salary: employeeSalaries) {
-            if (salary == 0) {
-                continue;
+            if (salary != 0) {
+                sum += salary;
+                count++;
             }
-            sum += salary;
-            count++;
         }
-        return sum / count;
+        if (count == 0) {
+            throw new IllegalArgumentException();
+        }
+        return sum /= count;
     }
+
     public ArrayList<Double> averageSalaries() {
         ArrayList<Double> res = new ArrayList();
-//        int num = allSalaries.size();
         for (double[] employeeSalaries: allSalaries) {
             try {
 
                 res.add(average(employeeSalaries));
             } catch (Exception e) {
-//                System
                 e.printStackTrace();
             }
 
@@ -41,12 +50,13 @@ public class Salaries {
             count++;
         }
 
-        int countfre = 0;
         for (double employeeAvg: averageSalaries()) {
-            if (employeeAvg > (sum - employeeAvg / (count - 1))) {
-                countfre++;
+            if (employeeAvg > 3 * (sum - employeeAvg) / (count - 1)) {
+                return false;
             }
         }
-        return countfre < 3;
+        return true;
     }
+
+
 }

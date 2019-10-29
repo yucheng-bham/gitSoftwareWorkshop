@@ -1,13 +1,13 @@
-package worksheet_3;
+package worksheet_2;
 
 public class Person {
     /**
      * A class Person with two field variables name and dob respectively.
      */
     private String name;
-    private Date dob;
+    private worksheet_3.Date dob;
 
-    public Person(String name, Date dob) {
+    public Person(String name, worksheet_3.Date dob) {
         this.name = name;
         this.dob = dob;
     }
@@ -20,7 +20,7 @@ public class Person {
         this.name = name;
     }
 
-    public Date getDob() {
+    public worksheet_3.Date getDob() {
         return dob;
     }
 

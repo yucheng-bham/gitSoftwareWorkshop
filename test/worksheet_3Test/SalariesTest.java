@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SalariesTest {
-    Salaries sal1;
+    private Salaries sal1;
 //    Salaries sal2;
 //    Salaries sal3;
 //    Salaries sal4;
@@ -18,7 +18,7 @@ class SalariesTest {
     @BeforeEach
     void setUp() {
         sal1 = new Salaries();
-        sal1.allSalaries = new ArrayList<double[]>();
+//        sal1.allSalaries = new ArrayList<double[]>();
 
         double[] employeeSalaries1;
         employeeSalaries1 = new double[12];
@@ -26,7 +26,7 @@ class SalariesTest {
         employeeSalaries1[1] = 1000;
         employeeSalaries1[2] = 2000;
         employeeSalaries1[3] = 2000;
-        sal1.allSalaries.add(employeeSalaries1);
+        sal1.add(employeeSalaries1);
 
 //        sal2 = new Salaries();
 //        sal2.allSalaries = new ArrayList<double[]>();
@@ -34,7 +34,7 @@ class SalariesTest {
         employeeSalaries2[0] = 1000;
         employeeSalaries2[1] = 1000;
         employeeSalaries2[2] = 1000;
-        sal1.allSalaries.add(employeeSalaries2);
+        sal1.add(employeeSalaries2);
 //        sal3 = new Salaries();
 //        sal3.allSalaries = new ArrayList<double[]>();
         double[] employeeSalaries3 = new double[12];
@@ -42,7 +42,7 @@ class SalariesTest {
         employeeSalaries3[1] = 2000;
         employeeSalaries3[2] = 2000;
         employeeSalaries3[3] = 2000;
-        sal1.allSalaries.add(employeeSalaries3);
+        sal1.add(employeeSalaries3);
 
 //        sal4 = new Salaries();
 //        sal4.allSalaries = new ArrayList<double[]>();
@@ -51,7 +51,7 @@ class SalariesTest {
         employeeSalaries4[1] = 1500;
         employeeSalaries4[2] = 2000;
         employeeSalaries4[3] = 2000;
-        sal1.allSalaries.add(employeeSalaries4);
+        sal1.add(employeeSalaries4);
 
 //        sal5 = new Salaries();
 //        sal5.allSalaries = new ArrayList<double[]>();
@@ -60,37 +60,43 @@ class SalariesTest {
         employeeSalaries5[1] = 1500;
         employeeSalaries5[2] = 2000;
         employeeSalaries5[3] = 2000;
-        sal1.allSalaries.add(employeeSalaries5);
+        sal1.add(employeeSalaries5);
     }
 
     @Test
     void average1() {
+        double[] Salary = { 1000, 1000, 2000, 2000, 0, 0, 0, 0, 0, 0, 0, 0 };
         double expected = 1500.0;
-        double actual = sal1.average(sal1.allSalaries.get(0));
+        sal1.add(Salary);
+        double actual = sal1.average(Salary);
         assertEquals(expected,actual,"Error");
     }
     @Test
     void average2() {
+        double[] Salary = { 1000, 1000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         double expected = 1000.0;
-        double actual = sal1.average(sal1.allSalaries.get(1));
+        double actual = sal1.average(Salary);
         assertEquals(expected,actual,"Error");
     }
     @Test
     void average3() {
+        double[] Salary = { 1000, 2000, 2000, 2000, 0, 0, 0, 0, 0, 0, 0, 0 };
         double expected = 1750.0;
-        double actual = sal1.average(sal1.allSalaries.get(2));
+        double actual = sal1.average(Salary);
         assertEquals(expected,actual,"Error");
     }
     @Test
     void average4() {
+        double[] Salary = { 1000, 1500, 2000, 2000, 0, 0, 0, 0, 0, 0, 0, 0 };
         double expected = 1625.0;
-        double actual = sal1.average(sal1.allSalaries.get(3));
+        double actual = sal1.average(Salary);
         assertEquals(expected,actual,"Error");
     }
     @Test
     void average5() {
+        double[] Salary = { 103, 1500, 2000, 2000, 0, 0, 0, 0, 0, 0, 0, 0 };
         double expected = 1400.75;
-        double actual = sal1.average(sal1.allSalaries.get(4));
+        double actual = sal1.average(Salary);
         assertEquals(expected,actual,"Error");
     }
 

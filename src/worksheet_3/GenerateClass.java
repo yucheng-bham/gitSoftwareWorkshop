@@ -1,5 +1,10 @@
 package worksheet_3;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import java.io.*;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GenerateClass {
@@ -16,28 +21,39 @@ public class GenerateClass {
         int index = 0;
         String str = "";
         while (index < variableNames.length  ) {
-            str +=  " private " + variableTypes[index] +" " + variableNames[index] + ";" + "\n";
+            str +=  "  private " + variableTypes[index] +" " + variableNames[index] + ";" + "\n";
             index++;
         }
-        return str;
+        return str += "\n";
     }
+
+    /**
+     *
+     * @return
+     */
     public String makeConstructor() {
-        int index = 0;
-        String tempstr = "";
-        while (index < variableNames.length) {
-            tempstr += "" + variableTypes[index] + " " + variableNames[index] + ", ";
-            index++;
+        // return result if it is Default constructor or no-arg constructor
+        if (variableNames.length == 0) {
+            return "  public Person4(){}\n";
+        } else {
+            int index = 0;
+            String tempstr = "";
+            while (index < variableNames.length) {
+                tempstr += "" + variableTypes[index] + " " + variableNames[index] + ", ";
+                index++;
+            }
+            String str =
+                    "  public " + this.classname +
+                            "(" + tempstr.substring(0, tempstr.length() - 2) + ")"
+                            + "{" + "\n";
+            index = 0;
+            while (index < variableNames.length) {
+                str += "    this." + variableNames[index] + " = " +
+                        variableNames[index] + ";\n";
+                index++;
+            }
+            return str + "  }\n";
         }
-        String str = "public " + this.classname +
-                "(" +  tempstr.substring(0,tempstr.length() - 2) + ")"
-                + " {" + "\n";
-        index = 0;
-        while (index < variableNames.length) {
-            str += " this." + variableNames[index] + " = " +
-                    variableNames[index] + ";\n";
-            index++;
-        }
-        return str + "}";
     }
 
 
@@ -45,47 +61,73 @@ public class GenerateClass {
         int index = 0;
         String str = "";
         while (index < variableNames.length) {
-            str += "public " + variableTypes[index] + " " +
+            str += "  public " + variableTypes[index] + " " +
                     "get"+Character.toUpperCase(variableNames[index].charAt(0)) +
                     variableNames[index].substring(1, variableNames[index].length()) +
                     "(){" + "\n"+
-                    "  return "+ variableNames[index] +";" +"\n" +
-                    "}"
+                    "    return "+ variableNames[index] +";" +"\n" +
+                    "  }\n"
             ;
             index++;
-            if (index != variableNames.length) {
-                str += "\n";
-            }
         }
-
         return str;
     }
     public String makeSetters() {
         int index = 0;
         String str = "";
         while (index < variableNames.length) {
-            str += "public" + " void" + " " +
+            str += "  public" + " void" + " " +
                     "set"+Character.toUpperCase(variableNames[index].charAt(0)) +
                     variableNames[index].substring(1,variableNames[index].length()) +
-                    "(){" + "\n" +
-                    "  this."+ variableNames[index] +" = "+
+                    "(" + variableTypes[index] + " " + variableNames[index] + "){" + "\n" +
+                    "    this."+ variableNames[index] +" = "+
                     variableNames[index] +";\n" +
-                    "}";
+                    "  }\n";
             index++;
-            if (index != variableNames.length) {
-                str += "\n";
-            }
         }
 
         return str;
     }
 
+//    @Override
+//    public String toString() {
+//        return "GenerateClass{" +
+//                "classname='" + classname + '\'' +
+//                ", variableNames=" + Arrays.toString(variableNames) +
+//                ", variableTypes=" + Arrays.toString(variableTypes) +
+//                '}';
+//    }
+
     public void writeFile() {
-        Scanner s = new Scanner("sdfasd");
-        while (s.hasNext()) {
-            System.out.println(s.next());
+        try {
+
+            String content =
+                    "class " +
+                            Character.toUpperCase(classname.charAt(0)) +
+                            classname.substring(1,classname.length()) +
+                            "{\n" +
+                            this.makeFields()+ "\n" +
+                            this.makeConstructor() + "\n" +
+                            this.makeGetters() + "\n" +
+                            this.makeSetters() + "\n" +
+                            "}";
+            File file = new File(this.classname+ ".java");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fileWriter = new FileWriter(
+                    file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(
+                    fileWriter
+            );
+            bw.write(content);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+
     }
+
 
 }
