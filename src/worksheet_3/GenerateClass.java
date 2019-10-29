@@ -1,5 +1,7 @@
 package worksheet_3;
 
+import java.util.Scanner;
+
 public class GenerateClass {
     public String classname;
     public String[] variableNames;
@@ -14,7 +16,7 @@ public class GenerateClass {
         int index = 0;
         String str = "";
         while (index < variableNames.length  ) {
-            str += " " + "private " + variableTypes[index] + variableNames[index] + ";" + "/n";
+            str +=  " private " + variableTypes[index] +" " + variableNames[index] + ";" + "\n";
             index++;
         }
         return str;
@@ -23,15 +25,16 @@ public class GenerateClass {
         int index = 0;
         String tempstr = "";
         while (index < variableNames.length) {
-            tempstr += "" + variableTypes[index] + " " + variableNames[index] + ",";
+            tempstr += "" + variableTypes[index] + " " + variableNames[index] + ", ";
             index++;
         }
         String str = "public " + this.classname +
-                "(" +  tempstr.substring(0,tempstr.length() - 1) + ")"
-                + " {" + "/n";
+                "(" +  tempstr.substring(0,tempstr.length() - 2) + ")"
+                + " {" + "\n";
         index = 0;
         while (index < variableNames.length) {
-            str += "  this." + variableNames[index] + " = " + variableNames[index] + "/n";
+            str += " this." + variableNames[index] + " = " +
+                    variableNames[index] + ";\n";
             index++;
         }
         return str + "}";
@@ -42,13 +45,17 @@ public class GenerateClass {
         int index = 0;
         String str = "";
         while (index < variableNames.length) {
-            str += "public " + variableTypes[index] + " "
-                    + "get"+Character.toUpperCase(variableNames[index].charAt(0))
-                    + "(){" + "/n"
-                    + "  return "+ variableNames +";" +"/n"
-                    + "}"
+            str += "public " + variableTypes[index] + " " +
+                    "get"+Character.toUpperCase(variableNames[index].charAt(0)) +
+                    variableNames[index].substring(1, variableNames[index].length()) +
+                    "(){" + "\n"+
+                    "  return "+ variableNames[index] +";" +"\n" +
+                    "}"
             ;
             index++;
+            if (index != variableNames.length) {
+                str += "\n";
+            }
         }
 
         return str;
@@ -57,19 +64,27 @@ public class GenerateClass {
         int index = 0;
         String str = "";
         while (index < variableNames.length) {
-            str += "public" + " void" + " "
-                    + "set"+Character.toUpperCase(variableNames[index].charAt(0))
-                    + "(){" + "/n"
-                    + "  this."+ variableNames +" = "+ variableNames +";" +"/n"
-                    + "}"
-            ;
+            str += "public" + " void" + " " +
+                    "set"+Character.toUpperCase(variableNames[index].charAt(0)) +
+                    variableNames[index].substring(1,variableNames[index].length()) +
+                    "(){" + "\n" +
+                    "  this."+ variableNames[index] +" = "+
+                    variableNames[index] +";\n" +
+                    "}";
             index++;
+            if (index != variableNames.length) {
+                str += "\n";
+            }
         }
 
         return str;
     }
 
     public void writeFile() {
+        Scanner s = new Scanner("sdfasd");
+        while (s.hasNext()) {
+            System.out.println(s.next());
+        }
 
     }
 

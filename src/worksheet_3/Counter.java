@@ -24,7 +24,7 @@ public class Counter {
     public static final Pattern p12345 = Pattern.compile("[12345]");
     /**
      * Field variable to store the value of the counter
-      */
+     */
     private int counter;
 
     /**
@@ -45,24 +45,44 @@ public class Counter {
          *                4 (set counter)
          *                5 (exit)
          */
-        byte topChoice = 1; // Can be anything but 5 to enter the loop
+
+        byte topChoice = 0; // Can be anything but 5 to enter the loop
+
         while (topChoice != 5) {
+
             System.out.println("Please enter:\n" +
                     "1 to add to the total\n" +
                     "2 to subtract from the total\n" +
                     "3 to show the total\n" +
                     "4 to set the total\n" +
                     "5 to exit the program");
-            topChoice = (byte)Integer.parseInt(s.next(p12345));
-            switch (topChoice) {
-                case 1: add(s);
-                case 2: subtract(s);
-                case 3: show();
-                case 4: set(s);
-                case 5: System.out.println("Finally there are "
-                                   + counter + " items available.");
-                default: throw new IllegalArgumentException();
+            try {
+                topChoice = (byte) Integer.parseInt(s.next(p12345));
+            }catch (Exception e) {
+                System.out.println("Please enter a legal integer.");
+                s = new Scanner(System.in);
             }
+
+            switch (topChoice) {
+                case 1:
+                    add(s);
+                    break;
+                case 2:
+                    subtract(s);
+                    break;
+                case 3:
+                    show();
+                    break;
+                case 4:
+                    set(s);
+                    break;
+                case 5:
+                    System.out.println("Finally there are "
+                            + counter + " items available.");
+                    break;
+
+            }
+
         }
     }
 
