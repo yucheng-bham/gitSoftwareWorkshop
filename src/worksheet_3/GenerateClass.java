@@ -7,16 +7,34 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * A class GenerateClass with three field variables classname, variableNames and
+ * variableTypes of type String, String array and String array respectively.
+ *
+ * @version 2019-10-30
+ * @author Yu Cheng
+ */
 public class GenerateClass {
     public String classname;
     public String[] variableNames;
     public String[] variableTypes;
 
+    /**
+     *
+     * @param classname The classname of the GenerateClass.
+     * @param variableNames The variableNames of the GenerateClass.
+     * @param variableTypes The variableTypes of the GenerateClass.
+     */
     public GenerateClass(String classname, String[] variableNames, String[] variableTypes) {
         this.classname = classname;
         this.variableNames = variableNames;
         this.variableTypes = variableTypes;
     }
+
+    /**
+     * The field variable of the class GenerateClass.
+     * @return All field variables of the class GenerateClass.
+     */
     public String makeFields() {
         int index = 0;
         String str = "";
@@ -28,8 +46,8 @@ public class GenerateClass {
     }
 
     /**
-     *
-     * @return
+     * The constructor of the class GenerateClass.
+     * @return The constructor of the class GenerateClass.
      */
     public String makeConstructor() {
         // return result if it is Default constructor or no-arg constructor
@@ -56,7 +74,10 @@ public class GenerateClass {
         }
     }
 
-
+    /**
+     * The getters of the class GenerateClass.
+     * @return The getters of the class GenerateClass.
+     */
     public String makeGetters() {
         int index = 0;
         String str = "";
@@ -72,6 +93,11 @@ public class GenerateClass {
         }
         return str;
     }
+
+    /**
+     * The setters of the class GenerateClass.
+     * @return The setters of the class GenerateClass.
+     */
     public String makeSetters() {
         int index = 0;
         String str = "";
@@ -98,6 +124,12 @@ public class GenerateClass {
 //                '}';
 //    }
 
+    /**
+     * This method is to write the class and its field variables, constructors,
+     * getters and setters respectively in the file which has the same name of
+     * the class. If there is IOException during the process of the method, the
+     * message of the stack would be printed.
+     */
     public void writeFile() {
         try {
 
